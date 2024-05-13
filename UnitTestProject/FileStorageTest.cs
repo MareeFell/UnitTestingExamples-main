@@ -198,5 +198,57 @@ namespace UnitTestProject
 
         //Свои тесты
 
+
+        [TestMethod]
+        [Test]
+        public void AddFileByList()
+        {
+            try
+            {
+                File file = new File("hdfdfa", "");
+                FileStorage fil = new FileStorage();
+                fil.Write(file);
+                fil.GetFiles().Add(file);
+                Assert.AreEqual(1, fil.GetFiles().Count, "Так быть не должно");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(String.Format("Exception {0} in method {1}", e.GetBaseException(), MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+        }
+
+
+        [TestMethod]
+        [Test]
+        public void TryAddNull()
+        {
+            try
+            {
+                FileStorage fil = new FileStorage();
+                fil.Write(null);
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(String.Format("Exception {0} in method {1}", e.GetBaseException(), MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+        }
+
+
+        [TestMethod]
+        [Test]
+        public void TryCreateNullableContentFile()
+        {
+            try
+            {
+                new File("asd", null);
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(String.Format("Exception {0} in method {1}", e.GetBaseException(), MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+        }
     }
 }
